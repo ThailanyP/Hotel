@@ -1,0 +1,364 @@
+<html>
+
+<head>
+
+	<script>
+	
+		
+
+		function ini() {
+			alert("Bem-vindo(a) ao Hotel Terabithia");
+
+			var nome_usuario = prompt('Olá, insira seu nome');
+			alert(`Olá ${nome_usuario}, seja bem-vindo(a) ao Hotel Terabithia`)
+			inicio();
+			/*senha();
+
+			function senha() {
+    		var senha_correta = '2678';
+    		var senha_inserida = prompt("Informe sua senha: ");
+    
+    		while (senha_inserida !== senha_correta) {
+        	alert("Senha incorreta. Tente novamente");
+        	senha_inserida = prompt("Informe sua senha: ");
+    		}
+    		inicio();
+			}*/
+		}
+
+		function inicio () {
+			var escolha = parseInt(prompt('Selecione uma opção: \n 1.) Reserva de Quartos \n 2.) Cadastro de Hóspedes \n 3.) Cadastro e pesquisa de hospedes \n 4.) Funcionários para eventos \n 5.) Buffet \n 6.) Eventos \n 7.) Restaurante Mein Teil \n 8.) Abastecimentos de veículos \n 9.) Manutenção \n 10.) Sair'));
+				switch (escolha) {
+					case 1:
+						reserva_quartos();
+						break;
+					case 2:
+						cadastro_hospedes();
+						break;
+					case 3:
+						pesquisa();
+						break;
+					case 4:
+						funcionariosEventos();
+						break;
+					case 5:
+						buffet();
+						break;
+					case 6:
+						eventos();
+						break;
+					case 7:
+						restaurante();
+						break;
+					case 8:
+						abastecer();
+						break;
+					case 9:
+						manutencao();
+						break;
+					case 10: 
+						sair();
+						break;
+					default:
+						erro();
+						break;
+				}
+			}	
+
+		function reserva_quartos() {
+			var nome_usuario = prompt('Olá, confirme seu nome, por favor.');
+			var v_diaria = 60;
+			alert(`Hotel Terabithia - Reserva de quartos \n O valor de nossa diaria é de R$ 60.`);
+			var diaria = parseFloat(prompt(" Quantas diárias serão necessárias?"));
+			if (diaria <= 0 || diaria > 30) {
+				alert("Valores inválidos. Por favor, digite novamente.")
+				reserva_quartos();
+			} 
+			var total = v_diaria * diaria;
+			alert(`O valor da diária é de R$ ${total}`);
+
+			var hospede = prompt("Qual o nome do hóspede?");
+			var confirmacao = confirm(`${nome_usuario}, você confirma a hospedagem para ${hospede} por ${diaria} dias?`);
+			if (confirmacao) {
+				alert(`${nome_usuario}, reserva efetuada para ${hospede}. O valor é de R$ ${total}.`);
+				inicio();
+			} else {
+				reserva_quartos();
+			}
+			inicio();
+		}
+			
+		function cadastro_hospedes() {
+  			var v_diaria = 60;
+  			var gratuitas = 0;
+  			var meias = 0;
+  			var integral = 0;
+  			var valorTotal = 0;
+
+  		alert('Hotel Terabithia - Cadastro de hóspedes');
+  		alert(`Hotel Terabithia - Cadastro de hóspedes \n O valor de nossa diária é de R$ 60.`);
+
+  		while (true) {
+    	var nome_hospede = prompt("Informe o nome do hóspede (para cancelar a ação, digite PARE).");
+    	if (nome_hospede.toUpperCase() === "PARE") {
+     	 break;
+    	}
+
+    	var idade_hospede = parseInt(prompt("Insira a idade do hóspede: "));
+    	var valorHospedagem = 0;
+    	if (idade_hospede < 6) {
+     	 alert(nome_hospede + " possui gratuidade.");
+    	  gratuitas++;
+    	} else if (idade_hospede > 60) {
+    	valorHospedagem = v_diaria / 2;
+      	alert(nome_hospede + " paga meia.");
+      	meias++;
+    	} else {
+      	valorHospedagem = v_diaria;
+      	alert(nome_hospede + " paga valor integral");
+      	integral++;
+    	}
+
+    	valorTotal += valorHospedagem;
+    	alert("Hóspede: " + nome_hospede + "\nValor pago: R$ " + valorHospedagem.toFixed(2));
+
+  }
+
+  		alert(`Quantidade de gratuitas: ${gratuitas}. \nQuantidade de meias hospedagens: ${meias}. \nQuantidade de integrais: ${integral}.`);
+  		alert(`Valor total: R$ ${valorTotal.toFixed(2)}.`);
+
+  		inicio();
+}
+
+		function pesquisa() {
+
+		let hospedes = [];
+		let opcao;
+
+		while (opcao !== '4') {
+  			opcao = prompt('Selecione uma opção:\n1 - Cadastrar hóspede\n2 - Pesquisar hóspede\n3 - Listar hóspedes\n4 - Sair');
+  
+  		switch (opcao) {
+    		case '1':
+      		if (hospedes.length < 15) {
+       		const nome = prompt('Digite o nome do hóspede:');
+       		hospedes.push(nome);
+        	alert('Hóspede cadastrado com sucesso.');
+     		} else {
+        	alert('Máximo de cadastros atingido.');
+      }
+      break;
+      
+    	case '2':
+      	const nomeBusca = prompt('Digite o hóspede que deseja encontrar:');
+      	const hospedeEncontrado = hospedes.find(hospede => hospede === nomeBusca);
+      	if (hospedeEncontrado) {
+        alert(`Hóspede ${nomeBusca} se encontra na lista.`);
+      } else {
+        alert('Hóspede não encontrado.');
+      }
+      break;
+      
+    	case '3':
+     	let listaHospedes = '';
+      	hospedes.forEach(hospede => {
+        listaHospedes += `${hospede}\n`;
+      });
+      	alert(listaHospedes);
+      	break;
+      
+    	case '4':
+      	alert('Programa encerrado.');
+      	break;
+      
+    	default:
+      	alert('Opção inválida. Tente novamente.');
+      	break;
+  }
+}}
+		function funcionariosEventos(){
+			var nome_usuario = prompt('Olá, confirme seu nome, por favor.');
+
+		alert('Hotel Terabithia - Funcionários para eventos \nBem-vindo à nossa central de eventos! Antes de escolher um dia e local, você precisa contratar funcionários e determinar o horario do evento.');
+
+		var hora = parseFloat(prompt("Qual será a duração do evento em horas?"))
+		var garcons = parseFloat(prompt("Quantos garçons serão necessários?"))
+
+		var preco_por_hora = hora * garcons * 15.50;
+
+		alert(`O valor total foi de R$ ${preco_por_hora}`);
+
+		var confirmacao = confirm(`Gostaria de efetuar a reserva?`);
+		if (confirmacao) {
+				alert(`${nome_usuario}, reserva efetuada com sucesso.`);
+				} else {
+				alert(`Reserva cancelada. Voltando para a página inicial.`);
+			}
+			inicio();
+		}
+
+		function buffet(){
+			alert(`Hotel Terabithia - Buffet So gut\nVamos planejar o buffet para seu evento!`);
+
+			let convidados = (parseInt(prompt("Quantos convidados irão comparecer?")))
+			if (convidados > 350){
+				alert("Quantidade de convidados superior à capacidade máxima.")
+				buffet();
+			} else {
+
+			//quantidade
+			let agua = convidados * 0.5;
+			let cafe = convidados * 0.2;
+			let salgado = convidados * 7;
+
+			//custo comida
+			let Cagua = agua * 0.40;
+			let Ccafé = cafe * 0.80;
+			let Csalgado = (salgado / 100) * 34;
+			let valorTot = agua + cafe + salgado
+
+			alert(`A quantidade de água é ${agua} litros.\nA quantidade de café é ${cafe} litros.\nA quantidade de salgados é ${salgado}. O valor total é de R$ ${valorTot}`);
+
+			var confirmacao = confirm("Podemos fechar o pedido?")
+			if (confirmacao) {
+				alert(`Pedido efetuado com sucesso.`);
+				} else {
+				alert(`Pedido cancelado. Voltando para a página inicial.`);
+			}
+		}
+			inicio();
+		}
+
+		function eventos(){
+		alert(`Hotel Terabithia - Auditórios para eventos\nVamos planejar seu evento!`)
+			
+		const numConvidados = prompt("Quantos convidados irão comparecer?");
+
+		if (numConvidados < 0 || numConvidados > 350) {
+		alert("Quantidade de convidados superior à capacidade máxima");
+		eventos()
+		} else if (numConvidados <= 150 + 70) {
+  		const cadeirasAdicionais = numConvidados - 150;
+ 		if (cadeirasAdicionais > 0) {
+    	alert(`Use o auditório Rosa (inclua mais ${cadeirasAdicionais} cadeiras`);
+  		} else {
+  		  alert("Use o auditório Rosa");
+  			}
+		} else {
+ 			 alert("Use o auditório Branco");
+		}
+
+		var confirmacao = confirm("Podemos confirmar a reserva?")
+			if (confirmacao) {
+				alert(`Reserva efetuada com sucesso.`);
+				} else {
+				alert(`Pedido cancelado. Voltando para a página inicial.`);
+			}
+			inicio();
+		}
+		
+		function restaurante(){
+			alert(`Hotel Terabithia - Reservas para o restaurante Mein teil`);
+			const diaSemana = prompt("Para qual dia da semana será feita a reserva?")
+			const hora = parseInt(prompt("Qual horário?"));
+
+			if ((diaSemana == "sábado" || diaSemana == "domingo") && hora > 15) {
+   			 alert("Restaurante indisponível");
+  			} else if (hora < 7 || hora > 23) {
+    		alert("Restaurante indisponível");
+			restaurante();
+  			} else {
+   			const nomeEmpresa = prompt("Qual o nome da empresa?");
+    		alert(`Restaurante reservado para ${nomeEmpresa}: ${diaSemana} às ${hora}hs.`);
+  }
+  inicio();
+}
+
+
+		function abastecer() {
+  alert("Hotel Terabithia - Abastecimento");
+
+	let precoAlcoolWayne = parseFloat(prompt("Qual o valor do álcool no posto Wayne Oil?"));
+	let precoGasolinaWayne = parseFloat(prompt("Qual o valor da gasolina no posto Wayne Oil?"));
+	let precoAlcoolStark = parseFloat(prompt("Qual o valor do álcool no posto Stark Petrol?"));
+	let precoGasolinaStark = parseFloat(prompt("Qual o valor da gasolina no posto Stark Petrol?"));
+
+	let relacaoAlcoolGasolinaWayne = precoAlcoolWayne / precoGasolinaWayne;
+	let relacaoAlcoolGasolinaStark = precoAlcoolStark / precoGasolinaStark;
+
+	let postoMaisBarato;
+	let combustivelMaisBarato;
+
+	if (relacaoAlcoolGasolinaWayne < 0.7 * relacaoAlcoolGasolinaStark) {
+ 	 combustivelMaisBarato = "álcool";
+ 	 postoMaisBarato = "Wayne Oil";
+	} else {
+  	combustivelMaisBarato = "gasolina";
+  	postoMaisBarato = precoGasolinaWayne < precoGasolinaStark ? "Wayne Oil" : "Stark Petrol";
+}
+
+alert("É mais barato abastecer com " + combustivelMaisBarato + " no posto " + postoMaisBarato + ".");
+
+inicio();
+}
+
+
+		function manutencao() {
+ 		 var empresas = []; 
+  		var menorValor = Infinity; 
+
+  			do {
+    	var nome = prompt("Qual o nome da empresa?");
+    	var valor = parseFloat(prompt("Qual o valor por aparelho?"));
+    	var quantidade = parseInt(prompt("Qual a quantidade de aparelhos?"));
+    	var desconto = parseFloat(prompt("Qual a porcentagem de desconto?"));
+    	var minimoDesconto = parseInt(prompt("Qual o número mínimo de aparelhos para conseguir o desconto?"));
+
+    	var total = valor * quantidade; 
+
+   		 if (quantidade >= minimoDesconto) {
+      	var valorDesconto = (total * desconto) / 100;
+      	total -= valorDesconto; 
+    }
+
+    	alert(`O serviço de ${nome} custará R$ ${total.toFixed(2)}`);
+
+    		if (total < menorValor) {
+      	menorValor = total;
+      	empresas.unshift(nome);
+    		} else {
+     	 empresas.push(nome); 
+    }
+
+    	var continuar = prompt("Deseja informar novos dados? (S/N)").toUpperCase();
+  			} while (continuar !== "N");
+ 	 inicio();
+
+  		alert(`O orçamento de menor valor é o de ${empresas[0]} por R$ ${menorValor.toFixed(2)}`);
+		inicio();
+}
+		function erro() {
+			alert('Por favor, informe um número entre 1 e 10');
+			inicio();
+		}
+
+		function sair() {
+ 		 var confirma = confirm('Você deseja sair?');
+  			if (confirma) {
+    	alert(`Muito obrigado e até logo.`);
+    	window.close(); 
+  			} else {
+    inicio();
+  }
+}
+
+		
+		ini();
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>
